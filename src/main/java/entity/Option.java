@@ -7,23 +7,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name="option")
+public class Option {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Option> options;
+    @ManyToOne
+    private Category category;
+    @OneToMany(mappedBy = "characteristicsName", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Value> values;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products;
-
-    // ... getters/setters
 }
